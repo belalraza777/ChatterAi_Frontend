@@ -1,18 +1,20 @@
 import { logout } from "../../api/userApi.js";
-import "../chat/chat.css"
-export default function Logout({ loadThreads }) {
+import "../chat/chat.css";
+import { useNavigate } from "react-router-dom";
+
+export default function Logout() {
+    const navigate = useNavigate();
 
     async function handleLogout() {
         try {
             await logout();
-            await loadThreads();
-
+            navigate("/login");
         } catch (err) {
             console.log(error);
         }
     }
 
     return (
-            <button className="logout-btn" onClick={handleLogout}>Logout</button>
+        <button className="logout-btn" onClick={handleLogout}>Logout</button>
     )
 }

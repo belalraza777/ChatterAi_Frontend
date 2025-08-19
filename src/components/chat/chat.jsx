@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
 import './chat.css';
 import { threads, showThreadMessage, chatMessage } from "../../api/chatApi.js";
 import SelectedThread from './selectedThread.jsx';
@@ -8,8 +7,7 @@ import Sidebar from './sideBar.jsx';
 import Loader from './loader.jsx';
 
 export default function Chat() {
-    // Initialize navigation and component state
-    const navigate = useNavigate();
+    // Initialize component state
     const [threadList, setThreadList] = useState([]); // Stores all chat threads
     const [user, setUser] = useState({}); // Stores current user data
     const [selectedThread, setSelectedThread] = useState(null); // Currently active chat
@@ -22,8 +20,7 @@ export default function Chat() {
             setThreadList(result.data?.data || []); // Update thread list
             setUser(result.data?.user || {}); // Update user info
         } catch (error) {
-            // Redirect to login if unauthorized
-            if (error.response?.status === 401) navigate("/login");
+            console.error("Failed to load threads:", error);
         }
     }
 
