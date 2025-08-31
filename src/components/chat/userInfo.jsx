@@ -8,8 +8,8 @@ export default function UserInfo({ user,loadThreads }) {
         setShowLogout(!showLogout);
     }
     return (
-        <div className='profile-div'>
-            <p onClick={handleLogout}><i class="fa-solid fa-user"></i>  <b>{user.username}</b></p>
+        <div className='profile-div' onClick={handleLogout}>
+            <p><i class="fa-solid fa-user"></i>  <b>{user.username}</b></p>
             {showLogout ? <Logout loadThreads={loadThreads} /> : ""}
         </div>
     )

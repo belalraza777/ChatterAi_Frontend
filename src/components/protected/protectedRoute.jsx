@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import axios from 'axios';
+import './protectedRoute.css';
 
 // ProtectedRoute: renders children if authenticated, otherwise redirects to /login
 const ProtectedRoute = ({ children }) => {
@@ -8,7 +9,7 @@ const ProtectedRoute = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/user/check", { withCredentials: true })
+    axios.get("https://chatterai-backend.onrender.com/api/user/check", { withCredentials: true })
       .then(res => {
         if (res.status === 200) {
           setIsAuthenticated(true);
@@ -22,8 +23,11 @@ const ProtectedRoute = ({ children }) => {
       .finally(() => setLoading(false));
   }, []);
 
+// while checking auth
+  if (loading) return <div className="spinner-container">
+    <div className="advanced-spinner"></div></div>;         
 
-  if (loading) return <div>Loading...</div>;          // while checking auth
+  
   if (!isAuthenticated) return <Navigate to="/login" replace />; // redirect if not
 
   return children; // render protected content

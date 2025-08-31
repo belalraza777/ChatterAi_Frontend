@@ -1,7 +1,7 @@
 // /api/userApi.js
 import axios from "axios";
 
-const API_BASE = "http://localhost:3000/api/user"; // set your backend base URL here if needed
+const API_BASE = "https://chatterai-backend.onrender.com/api/user"; // set your backend base URL here if needed
 
 const axiosInstance = axios.create({
   baseURL: API_BASE,
